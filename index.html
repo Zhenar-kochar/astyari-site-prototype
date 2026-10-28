@@ -1,5 +1,8 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta charset="utf-8">
 <title>Astyari Re Site Build v2</title>
+<link rel="preload" as="image" href="img/poster.webp" media="(min-width:761px)">
+<link rel="preload" as="image" href="img/poster-s.webp" media="(max-width:760px)">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +33,10 @@
   --gl:max(16px,env(safe-area-inset-left,0px));
   --gr:max(16px,env(safe-area-inset-right,0px));
   --ease:cubic-bezier(.16,1,.3,1);
+  --el:max(var(--gl),calc((100% - 1240px) / 2));
+  --er:max(var(--gr),calc((100% - 1240px) / 2));
+  --h2:clamp(38px,5vw,72px);
+  --pad:clamp(96px,11vw,160px);
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -56,17 +63,19 @@ img{display:block;max-width:100%}
 .btn .arr{transition:transform .35s var(--ease)}
 .btn:hover .arr{transform:translateX(4px)}
 
+h2{font-weight:700}
 /* ---------- hero ---------- */
 #hero{position:relative;height:640vh;background:var(--ink)}
-#stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(120% 90% at 70% 40%,#3b4c5f 0%,#121b27 60%,#070b12 100%)}
+#stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#3a3427 url(img/poster.webp) 50% 50%/cover no-repeat}
+@media (max-width:760px){#stage{background-image:url(img/poster-s.webp)}}
 #gl{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transform:scale(1.04);transition:opacity 1.4s ease,transform 2.2s var(--ease)}
 #stage.ready #gl{opacity:1;transform:none}
 .scrim{position:absolute;inset:0;pointer-events:none;background:
   linear-gradient(90deg,rgba(7,11,18,.74) 0%,rgba(7,11,18,.4) 34%,rgba(7,11,18,0) 62%),
   linear-gradient(0deg,rgba(7,11,18,.62) 0%,rgba(7,11,18,0) 34%),
-  linear-gradient(180deg,rgba(7,11,18,.55) 0%,rgba(7,11,18,0) 18%)}
+  linear-gradient(180deg,rgba(7,11,18,.5) 0%,rgba(7,11,18,0) 17%)}
 .vignette{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 180px rgba(0,0,0,.45)}
-.top{position:fixed;left:0;right:0;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:calc(14px + env(safe-area-inset-top,0px)) 14px;padding-left:var(--gl);padding-right:var(--gr);color:var(--on-dark);transition:background .4s,backdrop-filter .4s,padding .4s}
+.top{position:fixed;left:0;right:0;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:calc(14px + env(safe-area-inset-top,0px)) 14px;padding-left:var(--el);padding-right:var(--er);color:var(--on-dark);transition:background .4s,backdrop-filter .4s,padding .4s}
 .top.solid{background:rgba(7,11,18,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;white-space:nowrap}
@@ -78,7 +87,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .nav a.l:hover{opacity:1}.nav a.l:hover::after{transform:scaleX(1);transform-origin:left}
 .nav .btn{min-height:40px;padding:9px 16px;font-size:14px}
 
-.intro{position:absolute;z-index:3;left:var(--gl);right:var(--gr);top:50%;transform:translateY(-44%);max-width:760px;color:var(--on-dark)}
+.intro{position:absolute;z-index:3;left:var(--el);right:var(--er);top:50%;transform:translateY(-44%);max-width:760px;color:var(--on-dark)}
 .eyebrow{color:var(--sky);margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .eyebrow::before{content:"";width:28px;height:1px;background:var(--sky)}
 .intro h1{font-size:clamp(46px,7vw,96px);font-weight:700}
@@ -93,7 +102,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .loaded .intro .ctas{animation:fadeUp 1.2s .6s var(--ease) both}
 @keyframes fadeUp{from{transform:translateY(16px);opacity:.3}to{transform:none;opacity:1}}
 
-.cap{position:absolute;z-index:3;left:var(--gl);right:var(--gr);bottom:calc(96px + env(safe-area-inset-bottom,0px));max-width:600px;color:var(--on-dark);opacity:0;pointer-events:none}
+.cap{position:absolute;z-index:3;left:var(--el);right:var(--er);bottom:calc(96px + env(safe-area-inset-bottom,0px));max-width:600px;color:var(--on-dark);opacity:0;pointer-events:none}
 .cap.on{pointer-events:auto}
 .cap .num{position:absolute;left:-6px;bottom:100%;margin-bottom:-.18em;font-family:var(--f-head);font-weight:800;font-stretch:75%;font-size:clamp(110px,14vw,200px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(158,220,247,.35);letter-spacing:-.04em;pointer-events:none}
 .cap .k{color:var(--sky);display:flex;align-items:center;gap:12px}
@@ -106,7 +115,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cap.swap h2{animation-delay:.05s}.cap.swap p{animation-delay:.1s}.cap.swap .ctas{animation-delay:.15s}
 @keyframes numIn{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
 
-.prog{position:absolute;z-index:4;left:var(--gl);right:var(--gr);bottom:calc(28px + env(safe-area-inset-bottom,0px));opacity:0;transition:opacity .5s}
+.prog{position:absolute;z-index:4;left:var(--el);right:var(--er);bottom:calc(28px + env(safe-area-inset-bottom,0px));opacity:0;transition:opacity .5s}
 .prog.on{opacity:1}
 .prog .track{position:relative;height:2px;background:rgba(238,243,247,.2)}
 .prog .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--brand-hi),var(--sky));box-shadow:0 0 12px rgba(106,200,241,.7)}
@@ -121,11 +130,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tag{position:absolute;left:0;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:6px 10px 6px 8px;background:rgba(7,11,18,.62);border:1px solid rgba(106,200,241,.38);color:#e6f3fb;font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;pointer-events:none;opacity:0;will-change:transform,opacity;backdrop-filter:blur(6px)}
 .tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sky);box-shadow:0 0 0 3px rgba(106,200,241,.25);animation:ping 1.8s ease-out infinite}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(106,200,241,.55)}100%{box-shadow:0 0 0 9px rgba(106,200,241,0)}}
-.vis-note{position:absolute;z-index:3;right:var(--gr);bottom:calc(64px + env(safe-area-inset-bottom,0px));font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(238,243,247,.45)}
+.vis-note{position:absolute;z-index:3;right:var(--er);bottom:calc(64px + env(safe-area-inset-bottom,0px));font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(238,243,247,.45)}
 #hero.nogl .cue,#hero.nogl .prog{display:none}
 
 /* ---------- intro loader ---------- */
-#loader{position:fixed;inset:0;z-index:100;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;color:var(--on-dark);transition:opacity .9s var(--ease),visibility .9s;animation:lAuto .9s 6.5s forwards}
+#loader{position:fixed;inset:0;z-index:100;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;color:var(--on-dark);transition:opacity .9s var(--ease),visibility .9s;animation:lAuto .9s 3s forwards}
 #loader.done{opacity:0;visibility:hidden}
 @keyframes lAuto{to{opacity:0;visibility:hidden}}
 #loader .lg{display:flex;align-items:center;gap:18px}
@@ -143,7 +152,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ph .pz,.ph .rv{position:absolute;inset:-6% 0;will-change:transform;backface-visibility:hidden}
 .ph .rv{inset:0;transform:scale(1.08);transition:transform 1.8s var(--ease)}
 .ph.in .rv{transform:scale(1)}
-.ph img{width:100%;height:100%;object-fit:cover;animation:kb 22s ease-in-out infinite alternate;animation-play-state:paused}
+.ph img{width:100%;height:100%;object-fit:cover;image-rendering:auto;animation:kb 22s ease-in-out infinite alternate;animation-play-state:paused}
 .ph.vis img{animation-play-state:running}
 .ph:nth-of-type(2n) img{animation-name:kb2}
 @keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.07) translate(-1.2%,-.8%)}}
@@ -154,7 +163,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ph figcaption{position:absolute;z-index:2;left:16px;bottom:14px;right:16px;color:#eef3f7;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 
 /* ---------- statement ---------- */
-.statement{background:var(--white);padding-block:clamp(90px,12vw,170px);padding-left:var(--gl);padding-right:var(--gr)}
+.statement{background:var(--white);padding-block:var(--pad);padding-left:var(--gl);padding-right:var(--gr)}
 .statement .mono{color:var(--brand);margin-bottom:28px;display:flex;align-items:center;gap:12px}
 .statement .mono::before{content:"";width:28px;height:1px;background:var(--brand)}
 .lit{font-family:var(--f-head);font-weight:600;font-stretch:86%;font-size:clamp(30px,4.4vw,64px);line-height:1.12;letter-spacing:-.02em;max-width:22ch}
@@ -171,12 +180,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ---------- horizontal reel ---------- */
 .reel{position:relative;background:var(--ink);color:var(--on-dark)}
 .reel .pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(20px,4vh,44px);padding-top:calc(64px + env(safe-area-inset-top,0px))}
-.reel .rhead{position:relative;z-index:2;padding-left:var(--gl);padding-right:var(--gr);display:flex;justify-content:space-between;align-items:end;gap:20px;pointer-events:none}
-.reel .rhead .mono{color:var(--sky);margin-bottom:12px}
-.reel .rhead h2{font-size:clamp(32px,4vw,56px)}
+.reel .rhead{position:relative;z-index:2;padding-left:var(--el);padding-right:var(--er);display:flex;justify-content:space-between;align-items:end;gap:20px;pointer-events:none}
+.reel .rhead .mono{color:var(--sky);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.reel .rhead .mono::before{content:"";width:28px;height:1px;background:var(--sky)}
+.reel .rhead h2{font-size:var(--h2)}
 .reel .count{font-family:var(--f-mono);font-size:13px;color:var(--on-dark-mute);white-space:nowrap}
 .reel .count b{color:var(--on-dark);font-weight:500}
-.track{display:flex;gap:clamp(16px,2.4vw,32px);padding-left:var(--gl);padding-right:30vw;align-items:flex-start;will-change:transform}
+.track{display:flex;gap:clamp(16px,2.4vw,32px);padding-left:var(--el);padding-right:30vw;align-items:flex-start;will-change:transform}
 .card{flex:none;width:clamp(280px,46vw,660px);display:flex;flex-direction:column;gap:16px}
 .card:nth-child(3n+2){width:clamp(260px,34vw,480px);margin-top:5vh}
 .card .ph{height:clamp(240px,48vh,560px)}
@@ -187,15 +197,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .card .meta i{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--sky)}
 .card h3{font-size:clamp(22px,2.2vw,30px)}
 .card p{color:var(--on-dark-mute);font-size:15px;margin-top:4px;max-width:44ch}
-.reel .bar{position:absolute;left:var(--gl);right:var(--gr);bottom:calc(30px + env(safe-area-inset-bottom,0px));height:2px;background:rgba(238,243,247,.16)}
+.reel .bar{position:absolute;left:var(--el);right:var(--er);bottom:calc(30px + env(safe-area-inset-bottom,0px));height:2px;background:rgba(238,243,247,.16)}
 .reel .bar i{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--brand-hi),var(--sky))}
 
 /* ---------- services showcase ---------- */
-.svc{background:var(--paper);padding-block:clamp(90px,10vw,150px);padding-left:var(--gl);padding-right:var(--gr)}
+.svc{background:var(--paper);padding-block:var(--pad);padding-left:var(--gl);padding-right:var(--gr)}
 .svc .head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 64px;align-items:end;margin-bottom:clamp(40px,6vw,80px)}
 .head .mono{color:var(--brand);margin-bottom:14px;display:flex;align-items:center;gap:12px}
 .head .mono::before{content:"";width:28px;height:1px;background:currentColor}
-.head h2{font-size:clamp(36px,4.8vw,66px)}
+.head h2{font-size:var(--h2)}
 .head p{color:var(--mute);max-width:50ch}
 .show{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px)}
 .frame{position:sticky;top:calc(96px + env(safe-area-inset-top,0px));height:min(72vh,640px)}
@@ -226,15 +236,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .team>.ph{position:absolute;inset:0}
 .team>.ph::after{background:linear-gradient(0deg,rgba(7,11,18,.96) 0%,rgba(7,11,18,.82) 38%,rgba(7,11,18,.35) 70%,rgba(7,11,18,.12) 100%)}
 .team .ph .pz{inset:-10% 0}
-.team .inner{position:relative;z-index:2;width:100%;padding-block:clamp(80px,10vw,140px);padding-left:var(--gl);padding-right:var(--gr)}
+.team .inner{position:relative;z-index:2;width:100%;padding-block:var(--pad);padding-left:var(--gl);padding-right:var(--gr)}
 .team .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 64px;align-items:end}
 .team .mono{color:var(--sky);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .team .mono::before{content:"";width:28px;height:1px;background:var(--sky)}
-.team h2{font-size:clamp(40px,6vw,88px);font-weight:700}
+.team h2{font-size:var(--h2)}
 .team .txt{display:flex;flex-direction:column;gap:16px;color:#d5e0ea;max-width:52ch}
 
 /* ---------- projects ---------- */
-.sec{padding-block:clamp(90px,10vw,150px);padding-left:var(--gl);padding-right:var(--gr)}
+.sec{padding-block:var(--pad);padding-left:var(--gl);padding-right:var(--gr)}
 .sec.white{background:var(--white)}
 .plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--text)}
 .plist li{position:relative;display:grid;grid-template-columns:80px minmax(0,1fr) minmax(0,240px) 40px;gap:16px;align-items:center;padding:28px 0;border-bottom:1px solid var(--line);isolation:isolate;transition:color .4s,padding .5s var(--ease)}
@@ -250,7 +260,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .plist .ar svg{width:16px;height:16px}
 
 .hd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 64px;align-items:end;margin-bottom:48px}
-.hd h2{font-size:clamp(36px,4.8vw,66px)}
+.hd h2{font-size:var(--h2)}
 /* ---------- credentials ---------- */
 .cred{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px}
 .iso{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -276,7 +286,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .contact .wrap{position:relative;z-index:1}
 .contact .head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 64px;align-items:end;margin-bottom:56px}
 .contact .head .mono{color:var(--sky)}
-.contact .head h2{font-size:clamp(44px,7vw,104px);font-weight:700}
+.contact .head h2{font-size:var(--h2)}
 .contact .head p{color:var(--on-dark-mute)}
 .cgrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px}
 .rows .row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 0;border-top:1px solid var(--line-dark)}
@@ -389,15 +399,16 @@ footer .brand span{font-size:15px;color:var(--on-dark)}
 
   <section class="reel" id="onsite">
     <div class="pin">
-      <div class="rhead"><div><div class="mono">On site</div><h2>Our crews at work</h2></div><div class="count"><b id="rIdx">01</b> / 07</div></div>
+      <div class="rhead"><div><div class="mono">On site</div><h2>Our crews at work</h2></div><div class="count"><b id="rIdx">01</b> / 08</div></div>
       <div class="track" id="track">
-        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p2.jpg" alt="The Astyari Re site team in blue coveralls and hard hats on a gravel site."></div></div></figure><div class="meta"><i>01</i><div><h3>The team</h3><p>Supervisors, operators and crews on site in the Kurdistan Region.</p></div></div></article>
-        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p6.jpg" alt="Workers tying a rebar cage." loading="lazy"></div></div></figure><div class="meta"><i>02</i><div><h3>Reinforcement</h3><p>Rebar cages tied on site to drawing.</p></div></div></article>
-        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p10.jpg" alt="A backhoe loader and a Scania truck on a gravel yard." loading="lazy"></div></div></figure><div class="meta"><i>03</i><div><h3>Fleet</h3><p>Heavy equipment and trucks, rented or supplied.</p></div></div></article>
-        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p8.jpg" alt="A mobile crane lifting a steel pipe guided by a worker." loading="lazy"></div></div></figure><div class="meta"><i>04</i><div><h3>Lifting</h3><p>Controlled lifts with banksmen on the ground.</p></div></div></article>
-        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p4.jpg" alt="Crew in white suits fixing reinforcement in a foundation trench." loading="lazy"></div></div></figure><div class="meta"><i>05</i><div><h3>Foundations</h3><p>Excavation, steel and concrete below ground.</p></div></div></article>
-        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p3.jpg" alt="A worker setting out a line between accommodation cabins." loading="lazy"></div></div></figure><div class="meta"><i>06</i><div><h3>Camp construction</h3><p>Accommodation camps set out and installed.</p></div></div></article>
-        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p9.jpg" alt="Crew and supervisor reviewing work between cabins." loading="lazy"></div></div></figure><div class="meta"><i>07</i><div><h3>Supervision</h3><p>A full-time superintendent on every site.</p></div></div></article>
+        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p2-s.webp" srcset="img/p2-s.webp 1200w, img/p2-l.webp 2400w" sizes="(max-width:640px) 80vw, 46vw" alt="The Astyari Re site team in blue coveralls and hard hats on a gravel site." loading="lazy" decoding="async"></div></div></figure><div class="meta"><i>01</i><div><h3>The team</h3><p>Supervisors, operators and crews on site in the Kurdistan Region.</p></div></div></article>
+        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p6-s.webp" srcset="img/p6-s.webp 1200w, img/p6-l.webp 1600w" sizes="(max-width:640px) 80vw, 46vw" alt="Workers in blue coveralls tying a rebar cage." loading="lazy" decoding="async"></div></div></figure><div class="meta"><i>02</i><div><h3>Reinforcement</h3><p>Rebar cages tied on site to drawing.</p></div></div></article>
+        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p10-s.webp" srcset="img/p10-s.webp 1200w, img/p10-l.webp 2000w" sizes="(max-width:640px) 80vw, 46vw" alt="A JCB backhoe loader and a Scania truck on a gravel yard." loading="lazy" decoding="async"></div></div></figure><div class="meta"><i>03</i><div><h3>Fleet</h3><p>Heavy equipment and trucks, rented or supplied.</p></div></div></article>
+        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p5-s.webp" srcset="img/p5-s.webp 1200w, img/p5-l.webp 1368w" sizes="(max-width:640px) 80vw, 46vw" alt="A mobile crane lifting a steel pipe next to a blue truck, with rebar and gravel staged on site." loading="lazy" decoding="async"></div></div></figure><div class="meta"><i>04</i><div><h3>Lifting</h3><p>Controlled lifts with banksmen on the ground.</p></div></div></article>
+        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p4-s.webp" srcset="img/p4-s.webp 1200w, img/p4-l.webp 2400w" sizes="(max-width:640px) 80vw, 46vw" alt="Crew in white suits fixing reinforcement in a foundation trench." loading="lazy" decoding="async"></div></div></figure><div class="meta"><i>05</i><div><h3>Foundations</h3><p>Excavation, steel and concrete below ground.</p></div></div></article>
+        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p3-s.webp" srcset="img/p3-s.webp 1200w, img/p3-l.webp 2000w" sizes="(max-width:640px) 80vw, 46vw" alt="A worker in an Astyari Re coverall setting out a line between accommodation cabins." loading="lazy" decoding="async"></div></div></figure><div class="meta"><i>06</i><div><h3>Camp construction</h3><p>Accommodation camps set out and installed.</p></div></div></article>
+        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p7-s.webp" srcset="img/p7-s.webp 1200w, img/p7-l.webp 1391w" sizes="(max-width:640px) 80vw, 46vw" alt="Crew in Astyari Re hi-vis vests installing a cabin unit." loading="lazy" decoding="async"></div></div></figure><div class="meta"><i>07</i><div><h3>Cabin installation</h3><p>Camp units set and fixed in place.</p></div></div></article>
+        <article class="card"><figure class="ph"><div class="pz"><div class="rv"><img src="img/p9-s.webp" srcset="img/p9-s.webp 1200w, img/p9-l.webp 1600w" sizes="(max-width:640px) 80vw, 46vw" alt="Crew and supervisor reviewing work between cabins." loading="lazy" decoding="async"></div></div></figure><div class="meta"><i>08</i><div><h3>Supervision</h3><p>A full-time superintendent on every site.</p></div></div></article>
       </div>
       <div class="bar"><i id="rBar"></i></div>
     </div>
@@ -407,17 +418,17 @@ footer .brand span{font-size:15px;color:var(--on-dark)}
     <div class="head"><div><div class="mono">Services</div><h2 class="rise">Twelve services, one contract</h2></div><p class="rise">From earthworks and fleet to construction and the life support services that keep a remote camp running.</p></div>
     <div class="show">
       <div class="frame" id="frame">
-        <figure class="ph on in vis"><div class="pz"><div class="rv"><img src="img/p4.jpg" alt="" loading="lazy"></div></div></figure>
-        <figure class="ph"><div class="pz"><div class="rv"><img src="img/p10.jpg" alt="" loading="lazy"></div></div></figure>
-        <figure class="ph"><div class="pz"><div class="rv"><img src="img/p6.jpg" alt="" loading="lazy"></div></div></figure>
-        <figure class="ph"><div class="pz"><div class="rv"><img src="img/p9.jpg" alt="" loading="lazy"></div></div></figure>
+        <figure class="ph on in vis"><div class="pz"><div class="rv"><img src="img/p4-s.webp" srcset="img/p4-s.webp 1200w, img/p4-l.webp 2400w" sizes="(max-width:980px) 92vw, 50vw" alt="" loading="lazy" decoding="async"></div></div></figure>
+        <figure class="ph"><div class="pz"><div class="rv"><img src="img/p10-s.webp" srcset="img/p10-s.webp 1200w, img/p10-l.webp 2000w" sizes="(max-width:980px) 92vw, 50vw" alt="" loading="lazy" decoding="async"></div></div></figure>
+        <figure class="ph"><div class="pz"><div class="rv"><img src="img/p6-s.webp" srcset="img/p6-s.webp 1200w, img/p6-l.webp 1600w" sizes="(max-width:980px) 92vw, 50vw" alt="" loading="lazy" decoding="async"></div></div></figure>
+        <figure class="ph"><div class="pz"><div class="rv"><img src="img/p9-s.webp" srcset="img/p9-s.webp 1200w, img/p9-l.webp 1600w" sizes="(max-width:980px) 92vw, 50vw" alt="" loading="lazy" decoding="async"></div></div></figure>
         <span class="badge" id="badge">01 · Ground</span>
       </div>
       <div class="items">
-        <div class="item" data-i="0"><figure class="ph inline"><div class="pz"><div class="rv"><img src="img/p4.jpg" alt="Foundation works." loading="lazy"></div></div></figure><span class="n">01</span><h3>Ground</h3><ul><li>Road &amp; site preparation</li><li>Surveying</li><li>GIS and mapping</li><li>Concrete production</li></ul></div>
-        <div class="item" data-i="1"><figure class="ph inline"><div class="pz"><div class="rv"><img src="img/p10.jpg" alt="Fleet vehicles." loading="lazy"></div></div></figure><span class="n">02</span><h3>Fleet</h3><ul><li>Heavy equipment rental &amp; supply</li><li>Trucking &amp; transportation</li><li>Fuel supply</li><li>Bulk materials supply</li></ul></div>
-        <div class="item" data-i="2"><figure class="ph inline"><div class="pz"><div class="rv"><img src="img/p6.jpg" alt="Rebar work." loading="lazy"></div></div></figure><span class="n">03</span><h3>Build</h3><ul><li>Camp &amp; permanent buildings</li><li>Fabrication</li><li>Electrical</li><li>HVAC</li></ul></div>
-        <div class="item" data-i="3"><figure class="ph inline"><div class="pz"><div class="rv"><img src="img/p9.jpg" alt="Camp crew." loading="lazy"></div></div></figure><span class="n">04</span><h3>Life support</h3><ul><li>Food supply &amp; catering</li><li>Waste management</li><li>Life support services</li><li>Project management</li></ul></div>
+        <div class="item" data-i="0"><figure class="ph inline"><div class="pz"><div class="rv"><img src="img/p4-s.webp" srcset="img/p4-s.webp 1200w, img/p4-l.webp 2400w" sizes="92vw" alt="Foundation works." loading="lazy" decoding="async"></div></div></figure><span class="n">01</span><h3>Ground</h3><ul><li>Road &amp; site preparation</li><li>Surveying</li><li>GIS and mapping</li><li>Concrete production</li></ul></div>
+        <div class="item" data-i="1"><figure class="ph inline"><div class="pz"><div class="rv"><img src="img/p10-s.webp" srcset="img/p10-s.webp 1200w, img/p10-l.webp 2000w" sizes="92vw" alt="Fleet vehicles." loading="lazy" decoding="async"></div></div></figure><span class="n">02</span><h3>Fleet</h3><ul><li>Heavy equipment rental &amp; supply</li><li>Trucking &amp; transportation</li><li>Fuel supply</li><li>Bulk materials supply</li></ul></div>
+        <div class="item" data-i="2"><figure class="ph inline"><div class="pz"><div class="rv"><img src="img/p6-s.webp" srcset="img/p6-s.webp 1200w, img/p6-l.webp 1600w" sizes="92vw" alt="Rebar work." loading="lazy" decoding="async"></div></div></figure><span class="n">03</span><h3>Build</h3><ul><li>Camp &amp; permanent buildings</li><li>Fabrication</li><li>Electrical</li><li>HVAC</li></ul></div>
+        <div class="item" data-i="3"><figure class="ph inline"><div class="pz"><div class="rv"><img src="img/p9-s.webp" srcset="img/p9-s.webp 1200w, img/p9-l.webp 1600w" sizes="92vw" alt="Camp crew." loading="lazy" decoding="async"></div></div></figure><span class="n">04</span><h3>Life support</h3><ul><li>Food supply &amp; catering</li><li>Waste management</li><li>Life support services</li><li>Project management</li></ul></div>
       </div>
     </div>
   </div></section>
@@ -425,7 +436,7 @@ footer .brand span{font-size:15px;color:var(--on-dark)}
   <div class="marquee" aria-hidden="true"><div class="row"><span>Road &amp; site preparation</span><span>Heavy equipment</span><span>Fuel supply</span><span>Camp construction</span><span>GIS &amp; mapping</span><span>Catering</span><span>Road &amp; site preparation</span><span>Heavy equipment</span><span>Fuel supply</span><span>Camp construction</span><span>GIS &amp; mapping</span><span>Catering</span></div></div>
 
   <section class="team">
-    <figure class="ph"><div class="pz"><div class="rv"><img src="img/p2.jpg" alt="The Astyari Re team on site." loading="lazy"></div></div></figure>
+    <figure class="ph"><div class="pz"><div class="rv"><img src="img/p2-s.webp" srcset="img/p2-s.webp 1200w, img/p2-l.webp 2400w" sizes="100vw" alt="The Astyari Re team on site." loading="lazy" decoding="async"></div></div></figure>
     <div class="inner"><div class="wrap">
       <div><div class="mono">How we work</div><h2 class="rise">One contractor from survey to handover.</h2></div>
       <div class="txt rise">
@@ -500,10 +511,10 @@ var reduce=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').
 var clamp=function(x,a,b){return Math.min(b===undefined?1:b,Math.max(a===undefined?0:a,x));};
 (function(){var L=document.getElementById('loader'),bar=L.querySelector('.ln i'),t0=performance.now();
   requestAnimationFrame(function(){bar.style.transform='scaleX(.3)';});setTimeout(function(){bar.style.transform='scaleX(.65)';},700);
-  window.__sceneReady=function(){if(L.classList.contains('done'))return;bar.style.transform='scaleX(1)';var wait=Math.max(0,1600-(performance.now()-t0));
-    setTimeout(function(){L.classList.add('done');document.documentElement.classList.add('loaded');},wait+300);};
+  window.__sceneReady=function(){if(L.classList.contains('done'))return;bar.style.transform='scaleX(1)';var wait=Math.max(0,900-(performance.now()-t0));
+    setTimeout(function(){L.classList.add('done');document.documentElement.classList.add('loaded');setTimeout(function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading='eager';});},2500);},wait+300);};
   if(reduce){L.classList.add('done');document.documentElement.classList.add('loaded');}
-  setTimeout(function(){window.__sceneReady();},6000);})();
+  setTimeout(function(){window.__sceneReady();},2200);})();
 var vh=innerHeight,vw=innerWidth;addEventListener('resize',function(){vh=innerHeight;vw=innerWidth;layoutReel();});
 
 /* smooth scroll */
@@ -545,13 +556,13 @@ function layoutReel(){track.style.transform='none';dist=Math.max(0,track.scrollW
 layoutReel();window.addEventListener('load',layoutReel);
 
 /* parallax + scroll-linked loop */
-var pz=[].slice.call(document.querySelectorAll('.ph .pz'));
+var pz=[].slice.call(document.querySelectorAll('.ph .pz')),lastN=-1;
 function loop(){
   var y=window.scrollY;
   top.classList.toggle('solid',y>document.getElementById('hero').offsetHeight-vh*1.1);
   /* statement lighting */
   var r=lit.getBoundingClientRect();var k=clamp((vh*.85-r.top)/(r.height+vh*.45));var n=Math.floor(k*words.length*1.05);
-  words.forEach(function(w,i){var on=i<n;w.classList.toggle('dim',!on);w.classList.toggle('hl',on&&w.classList.contains('hlc'));});
+  if(n!==lastN){lastN=n;words.forEach(function(w,i){var on=i<n;w.classList.toggle('dim',!on);w.classList.toggle('hl',on&&w.classList.contains('hlc'));});}
   /* reel */
   var rr=reel.getBoundingClientRect();var rp=clamp(-rr.top/Math.max(1,rr.height-vh));track.style.transform='translate3d('+(-rp*dist).toFixed(1)+'px,0,0)';rBar.style.transform='scaleX('+rp.toFixed(4)+')';
   var ci=Math.min(cards.length-1,Math.round(rp*(cards.length-1)));rIdx.textContent='0'+(ci+1);
@@ -561,7 +572,8 @@ function loop(){
   /* services active item */
   if(innerWidth>980){var best=0,bd=1e9;items.forEach(function(it,i){var b=it.getBoundingClientRect();var d=Math.abs(b.top+b.height/2-vh/2);if(d<bd){bd=d;best=i;}});setAct(best);}
 }
-function raf(t){if(lenis)lenis.raf(t);loop();requestAnimationFrame(raf);}
+var need=true;addEventListener('scroll',function(){need=true;},{passive:true});addEventListener('resize',function(){need=true;});
+function raf(t){if(lenis)lenis.raf(t);if(need||lenis){need=false;loop();}requestAnimationFrame(raf);}
 requestAnimationFrame(raf);
 
 document.querySelectorAll('.copy').forEach(function(btn){btn.addEventListener('click',function(){var el=document.getElementById(btn.getAttribute('data-copy'));var done=function(t){btn.textContent=t;setTimeout(function(){btn.textContent='Copy';},1400);};var fb=function(){var rg=document.createRange();rg.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(rg);done('Selected');};try{navigator.clipboard.writeText(el.textContent).then(function(){done('Copied');},fb);}catch(e){fb();}});});
@@ -601,6 +613,7 @@ function uiUpdate(p){
   var co=smooth(.06,.11,p);cap.style.opacity=co;cap.classList.toggle('on',co>.5);
   prog.classList.toggle('on',p>.05);fill.style.width=(p*100).toFixed(2)+'%';cue.style.opacity=1-smooth(.005,.03,p);
   setStage(stageFor(p));}
+function initScene(){
 /* ================= 3D scene ================= */
 function noGL(){ hero.classList.add('nogl'); canvas.style.display='none'; setStage(0); cap.style.opacity=1; if(window.__sceneReady)window.__sceneReady(); }
 if(!window.THREE||!THREE.Sky||!THREE.BufferGeometryUtils){ noGL(); return; }
@@ -610,16 +623,18 @@ if(!renderer.getContext()){ noGL(); return; }
 
 const SMALL=Math.min(innerWidth,innerHeight)<700||innerWidth<760;
 const LITE=SMALL||location.hash==='#lite'||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2);
-const DPR_MAX=Math.min(window.devicePixelRatio||1, LITE?1.35:2);
-const DPR_MIN=LITE?.75:1;
-let dpr=Math.min(DPR_MAX,LITE?1.25:1.75);
+const DEV=window.devicePixelRatio||1;
+/* one resolution for the whole experience: chosen once during the intro, then locked */
+const DPR_TARGET=LITE?Math.min(DEV,1.5):Math.min(Math.max(DEV,1.5),2);
+const DPR_FLOOR=LITE?.9:1;
+let dpr=DPR_TARGET;
 renderer.setPixelRatio(dpr);
 renderer.outputEncoding=THREE.sRGBEncoding;
 renderer.toneMapping=THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure=.5;
-renderer.shadowMap.enabled=!LITE; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.shadowMap.enabled=true; renderer.shadowMap.type=LITE?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;
 const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(34,1,.5,9000);
+const camera=new THREE.PerspectiveCamera(34,1,1,9000);
 const ANISO=Math.min(8,renderer.capabilities.getMaxAnisotropy());
 
 let seed=11; const rnd=()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};
@@ -681,7 +696,7 @@ const Mt={
   survey:new THREE.MeshBasicMaterial({color:new THREE.Color('#7fd3f7'),transparent:true,opacity:0,depthWrite:false,toneMapped:false}),
   surveyGrid:new THREE.LineBasicMaterial({color:new THREE.Color('#7fd3f7'),transparent:true,opacity:0,depthWrite:false,toneMapped:false}),
   flag:S({color:lin('#ff6a1a'),roughness:.6}),
-  link:S({map:T.link,transparent:true,alphaTest:.35,side:THREE.DoubleSide,roughness:.5,metalness:.6}),
+  link:S({map:T.link,alphaTest:.3,alphaToCoverage:true,side:THREE.DoubleSide,roughness:.5,metalness:.6}),
   barrier:S({map:T.barrier,roughness:.5}),
   sign:S({map:T.sign,roughness:.45,metalness:.1,emissive:lin('#ffffff'),emissiveMap:T.sign,emissiveIntensity:0}),
   foliage:S({color:lin('#4f5834'),roughness:.95}),
@@ -722,21 +737,23 @@ function bake(g){
 
 /* ---------- sky, sun, environment ---------- */
 const sky=new THREE.Sky();sky.scale.setScalar(45000);scene.add(sky);
-const su=sky.material.uniforms;su.turbidity.value=8.5;su.rayleigh.value=2;su.mieCoefficient.value=.007;su.mieDirectionalG.value=.86;
+const su=sky.material.uniforms;su.mieDirectionalG.value=.84;
+function sunElev(p){return p<.8?lerp(16,7,smooth(0,.8,p)):lerp(7,-.8,smooth(.8,1,p));}
+function skyAt(e,u){u.turbidity.value=8.5;u.rayleigh.value=2;u.mieCoefficient.value=lerp(.012,.007,clamp((e+.8)/7.8));u.mieDirectionalG.value=.86;}
 const sunV=new THREE.Vector3();
-const sunL=new THREE.DirectionalLight(lin('#ffc890'),2.5);sunL.castShadow=!LITE;const SM=SMALL?1024:2048;sunL.shadow.mapSize.set(SM,SM);
+const sunL=new THREE.DirectionalLight(lin('#ffc890'),2.5);sunL.castShadow=true;const SM=LITE?1024:2048;sunL.shadow.mapSize.set(SM,SM);
 const sc=sunL.shadow.camera;sc.left=-92;sc.right=92;sc.top=92;sc.bottom=-92;sc.near=40;sc.far=620;sunL.shadow.bias=-.0004;sunL.shadow.normalBias=.05;
 scene.add(sunL);scene.add(sunL.target);
 const hemi=new THREE.HemisphereLight(lin('#c5d6ea'),lin('#8c7451'),.3);scene.add(hemi);
 scene.fog=new THREE.FogExp2(lin('#cdbfa7'),.00045);
-const AZ=72;
+const AZ=72;const EXP_DAY=.6;
 function sunDir(elev,out){return out.setFromSphericalCoords(1,THREE.MathUtils.degToRad(90-elev),THREE.MathUtils.degToRad(AZ));}
 const ENV=[];
 (function(){const pm=new THREE.PMREMGenerator(renderer);const es=new THREE.Scene();const k=new THREE.Sky();k.scale.setScalar(45000);es.add(k);const ku=k.material.uniforms;
-  [[16,.007],[9,.008],[4,.01],[-.8,.012]].forEach(e=>{ku.turbidity.value=8.5;ku.rayleigh.value=2;ku.mieDirectionalG.value=.86;ku.mieCoefficient.value=e[1];sunDir(e[0],ku.sunPosition.value);ENV.push({elev:e[0],tex:pm.fromScene(es,.04).texture});});
+  (LITE?[16,11,7,4,1.5,-.8]:[16,14,12,10.5,9,8,7,6,5,4,3,2,1,0,-.8]).forEach(e=>{skyAt(e,ku);sunDir(e,ku.sunPosition.value);ENV.push({elev:e,tex:pm.fromScene(es,.04).texture});});
   pm.dispose();k.material.dispose();k.geometry.dispose();})();
 let envIdx=-1;
-function setSun(elev){sunDir(elev,sunV);su.sunPosition.value.copy(sunV);sunL.position.copy(sunV).multiplyScalar(360);
+function setSun(elev){skyAt(elev,su);sunDir(elev,sunV);su.sunPosition.value.copy(sunV);sunL.position.copy(sunV).multiplyScalar(360);
   let bi=0,bd=1e9;ENV.forEach((e,i)=>{const d=Math.abs(e.elev-elev);if(d<bd){bd=d;bi=i;}});if(bi!==envIdx){envIdx=bi;scene.environment=ENV[bi].tex;}}
 
 /* ---------- terrain ---------- */
@@ -758,9 +775,10 @@ function H(x,z){let d=rectDist(x,z);if(z>CZ1-5)d=Math.min(d,Math.max(0,Math.abs(
   const m=new THREE.Mesh(g,S({vertexColors:true,roughness:1}));m.position.set(0,-30,-2900);scene.add(m);
 })();
 const CAMXZ=[];(function(){const kp=[[-125,178],[-112,150],[-74,96],[8,112],[72,92],[-58,78]];for(let i=0;i<kp.length-1;i++)for(let t=0;t<=10;t++)CAMXZ.push([lerp(kp[i][0],kp[i+1][0],t/10),lerp(kp[i][1],kp[i+1][1],t/10)]);})();
-(function(){const N=LITE?320:1000;const im=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),Mt.foliage,N);const m=new THREE.Matrix4(),q=new THREE.Quaternion(),s=new THREE.Vector3(),p=new THREE.Vector3(),c=new THREE.Color();let k=0;
+(function(){const N=LITE?320:1000;const shG=new THREE.IcosahedronGeometry(1,1);(function(){const n=shG.attributes.normal,v=new THREE.Vector3();for(let i=0;i<n.count;i++){v.set(n.getX(i),n.getY(i)+1.1,n.getZ(i)).normalize();n.setXYZ(i,v.x,v.y,v.z);}})();
+const im=new THREE.InstancedMesh(shG,Mt.foliage,N);const m=new THREE.Matrix4(),q=new THREE.Quaternion(),s=new THREE.Vector3(),p=new THREE.Vector3(),c=new THREE.Color();let k=0;
   while(k<N){const x=R(-1100,1100),z=R(-1300,700);if(rectDist(x,z)<40)continue;if(z>CZ1&&Math.abs(x)<24)continue;if(Math.hypot(x,z)<230&&rnd()<.6)continue;const cl=Math.sin(x*.013)*Math.cos(z*.017);if(cl<-.1&&rnd()<.7)continue;
-    if(CAMXZ.some(c=>Math.hypot(x-c[0],z-c[1])<75))continue;const sz=R(.9,2.6)*(Math.hypot(x,z)>400?1.6:1);p.set(x,H(x,z)+sz*.25,z);s.set(sz*R(.9,1.4),sz*R(.6,.9),sz*R(.9,1.4));q.setFromEuler(new THREE.Euler(0,R(0,6),0));m.compose(p,q,s);im.setMatrixAt(k,m);c.copy(lin(rnd()<.5?'#86834e':'#787246')).multiplyScalar(R(.85,1.2));im.setColorAt(k,c);k++;}
+    if(CAMXZ.some(c=>Math.hypot(x-c[0],z-c[1])<75))continue;const sz=R(.9,2.6)*(Math.hypot(x,z)>400?1.6:1);p.set(x,H(x,z)+sz*.25,z);s.set(sz*R(.9,1.4),sz*R(.6,.9),sz*R(.9,1.4));q.setFromEuler(new THREE.Euler(0,R(0,6),0));m.compose(p,q,s);im.setMatrixAt(k,m);c.copy(lin(rnd()<.5?'#959163':'#868159')).multiplyScalar(R(.85,1.2));im.setColorAt(k,c);k++;}
   im.castShadow=false;im.receiveShadow=true;scene.add(im);})();
 
 /* ---------- survey overlay (brand blue, BIM-style) ---------- */
@@ -979,7 +997,7 @@ const CREW=[
   {p:[[-2.6,B2+6.6]],ry:-.15,a:.86,b:2,hat:1},{p:[[1.2,B2+7.1]],ry:.25,a:.86,b:2},{p:[[4.8,B2+6.3]],ry:-.55,a:.87,b:2},{p:[[-6.4,B2+7.4]],ry:.5,a:.875,b:2}
 ];
 const NCR=CREW.length;
-const crewIM=crewGeo.map((g,i)=>{const im=new THREE.InstancedMesh(g,crewMat[i],NCR);im.castShadow=!LITE;im.receiveShadow=true;im.frustumCulled=false;scene.add(im);return im;});
+const crewIM=crewGeo.map((g,i)=>{const im=new THREE.InstancedMesh(g,crewMat[i],NCR);im.castShadow=true;im.receiveShadow=true;im.frustumCulled=false;scene.add(im);return im;});
 (function(){const hy=lin('#f2b705'),hw=lin('#f4f4f2'),c=new THREE.Color();CREW.forEach((m,i)=>{crewIM[2].setColorAt(i,m.hat?hw:hy);crewIM[0].setColorAt(i,c.setScalar(R(.82,1.06)));});crewIM[2].instanceColor.needsUpdate=true;crewIM[0].instanceColor.needsUpdate=true;})();
 let topFloorG=0;
 const _cm=new THREE.Matrix4(),_cq=new THREE.Quaternion(),_cs=new THREE.Vector3(),_cp=new THREE.Vector3(),_ce=new THREE.Euler();
@@ -1014,6 +1032,8 @@ function dustUpdate(p){dusts.forEach(D=>{const o=D.o,t=smooth(o.a,o.b,p);const a
 /* merge static parts */
 scene.children.slice().forEach(c=>{if(c.isGroup)bake(c);});
 
+scene.traverse(o=>{const ms=o.material?(Array.isArray(o.material)?o.material:[o.material]):[];ms.forEach(m=>{if(m.isMeshStandardMaterial)m.dithering=true;});});
+
 /* ---------- labels ---------- */
 const tags=Array.prototype.map.call(document.querySelectorAll('.tag'),el=>({el:el,from:+el.dataset.from,to:+el.dataset.to}));
 const V3=new THREE.Vector3();
@@ -1025,16 +1045,16 @@ const KL=[[0,3,0],[0,1,20],[-26,2,6],[0,6,0],[0,7,0],[2,5.5,2]];
 const camC=new THREE.CatmullRomCurve3(KP.map(a=>new THREE.Vector3(...a)),false,'centripetal');
 const lookC=new THREE.CatmullRomCurve3(KL.map(a=>new THREE.Vector3(...a)),false,'centripetal');
 let vw=1,vh=1,portrait=false,dirty=true;
-function resize(){vw=stageEl.clientWidth;vh=stageEl.clientHeight;renderer.setPixelRatio(dpr);renderer.setSize(vw,vh,false);camera.aspect=vw/vh;portrait=camera.aspect<.85;camera.fov=portrait?56:34;
+function resize(force){if(!force&&stageEl.clientWidth===vw&&stageEl.clientHeight===vh)return;vw=stageEl.clientWidth;vh=stageEl.clientHeight;renderer.setPixelRatio(dpr);renderer.setSize(vw,vh,false);camera.aspect=vw/vh;portrait=camera.aspect<.85;camera.fov=portrait?56:34;
   if(!portrait&&camera.aspect>1.3)camera.setViewOffset(vw,vh,-vw*.15,0,vw,vh);else camera.clearViewOffset();camera.updateProjectionMatrix();dirty=true;}
-addEventListener('resize',resize);
+addEventListener('resize',function(){resize();});
 
 const _orb=new THREE.Vector3(),_orl=new THREE.Vector3();
 const fogA=lin('#cdbfa7'),fogB=lin('#857a84'),sunA=lin('#ffd2a0'),sunB=lin('#ff9a5c'),tmp=new THREE.Vector3(),tl=new THREE.Vector3();
+const fogDay=lin('#d5cbba'),sunDay=lin('#ffe9cc'),hemiDay=lin('#cddcef'),hemiGold=lin('#c5d6ea');
 function update(p){
-  const dusk=smooth(.8,1,p);
-  const elev=p<.8?lerp(16,7,smooth(0,.8,p)):lerp(7,-.8,dusk);
-  su.mieCoefficient.value=lerp(.007,.012,dusk);setSun(elev);
+  const dusk=smooth(.8,1,p),gold=smooth(.3,.8,p);
+  setSun(sunElev(p));
   sunL.color.copy(sunA).lerp(sunB,smooth(.55,1,p));sunL.intensity=lerp(2.5,.4,dusk);
   renderer.toneMappingExposure=lerp(.56,1.05,dusk);hemi.intensity=lerp(.3,.22,dusk);
   scene.fog.color.copy(fogA).lerp(fogB,dusk);
@@ -1083,23 +1103,29 @@ function update(p){
 }
 
 /* ---------- render loop with adaptive resolution ---------- */
-let targetP=0,ps=0,last=performance.now(),lastP=-1,acc=0,cnt=0,cool=0;
+let targetP=0,ps=0,last=performance.now(),lastP=-1;
 function readP(){const r=hero.getBoundingClientRect(),total=hero.offsetHeight-innerHeight;return clamp(-r.top/Math.max(1,total));}
 function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;
   const r=hero.getBoundingClientRect(),inView=r.bottom>0&&r.top<innerHeight;
   targetP=readP();ps=reduce?targetP:ps+(targetP-ps)*(1-Math.exp(-dt*(window.__lenis?11:7)));if(Math.abs(targetP-ps)<.00004)ps=targetP;
   if(inView&&(dirty||Math.abs(ps-lastP)>.00002)){update(ps);renderer.render(scene,camera);lastP=ps;dirty=false;
-    acc+=dt;cnt++;if(cool>0)cool--;
-    if(cnt>=20){const avg=acc/cnt;acc=0;cnt=0;
-      if(avg>.034&&dpr>DPR_MIN&&!cool){dpr=Math.max(DPR_MIN,dpr-.25);resize();cool=40;}
-      else if(avg<.018&&dpr<DPR_MAX&&!cool){dpr=Math.min(DPR_MAX,dpr+.25);resize();cool=60;}}
-  } else {acc=0;cnt=0;}
+  }
   requestAnimationFrame(frame);}
-resize();targetP=readP();ps=targetP;update(ps);renderer.render(scene,camera);lastP=ps;
+resize(true);targetP=readP();ps=targetP;
+(function bench(){const gl=renderer.getContext(),px=new Uint8Array(4);const sync=()=>gl.readPixels(0,0,1,1,gl.RGBA,gl.UNSIGNED_BYTE,px);
+  try{update(.9);renderer.render(scene,camera);sync();update(.6);renderer.render(scene,camera);sync();
+    const t0=performance.now();for(let i=0;i<4;i++){update(.62+i*.09);renderer.render(scene,camera);}sync();const ft=(performance.now()-t0)/4;
+    if(ft>17){const k=Math.sqrt(14/ft);dpr=Math.max(DPR_FLOOR,Math.floor(dpr*k*4)/4);resize(true);}
+    window.__bench={ms:Math.round(ft*10)/10,dpr:dpr};}catch(e){}})();
+update(ps);renderer.render(scene,camera);lastP=ps;
 stageEl.classList.add('ready');
 if(window.__sceneReady)window.__sceneReady();
 window.__stats=()=>({calls:renderer.info.render.calls,tris:renderer.info.render.triangles,dpr:dpr,geos:renderer.info.memory.geometries});
 requestAnimationFrame(n=>{last=n;frame(n);});
 
+}
+setTimeout(initScene,reduce?0:450);
 })();
 </script>
+
+</body></html>
